@@ -1,4 +1,4 @@
 # PraguOS
 Lord Pragu's OS.
 
-Official OS of Kingdom of Pragusia.
+Official OS of <b>Kingdom of Pragusia.</b>
