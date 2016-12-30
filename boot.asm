@@ -1,19 +1,50 @@
 ;*******************************************************************
 ;	Boot1.asm
 ;			- Pragu OS Bootloader v0.0.1
-;			
-;	Booting the shit out of OSes since 2016
+;	
 ;*******************************************************************
 
-org	0x7c00
+ORG	0x7c00
 
-bits	16
+BITS	16
 
-start:
+START:	JMP LOADER
 
-	cli
-	hlt
+BOOTMSG DB "Welcome to PraguOS!", 0
 
-times 510 - ($ - $$) db 0
+;*******************************************************************
+;	Prints a string
+;*******************************************************************
 
-dw 0xAA55
+PRINT:
+	
+		LODSB
+		OR AL, AL
+		JZ PRINTDONE
+		MOV AH, 0x0E
+		INT 0x10
+		JMP PRINT
+
+PRINTDONE:
+	
+		RET
+
+;*******************************************************************
+;	Bootloader Entry Point
+;*******************************************************************
+
+LOADER:
+	
+		XOR AX, AX
+		MOV DS, AX
+		MOV ES, AX
+
+		MOV SI, BOOTMSG
+		CALL PRINT
+
+		CLI
+		HLT
+
+TIMES 510 - ($ - $$) DB 0
+
+DW 0xAA55
