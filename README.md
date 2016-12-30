@@ -1,2 +1,2 @@
 # PraguOS
-Lord Pragu's OS.
+Pragu is making his own OS.
